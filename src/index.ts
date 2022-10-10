@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import database from './data/database'
 
 dotenv.config()
 
@@ -15,4 +16,16 @@ app.get('/', (req: Request, res: Response) => {
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running in http://localhost/${process.env.PORT}...`)
-})
+});
+
+(async () => {
+  try {
+    await database.sync({ alter: true })
+    console.log('DB is ready...')
+  } catch (err: any) {
+    console.log(err.message)
+  }
+})()
+
+
+  
