@@ -1,31 +1,26 @@
-import express, { Request, Response } from 'express'
+import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import database from './data/database'
+import userRouter from './routes/userRouter'
 
 dotenv.config()
 
-const app = express()
+const app: Application = express()
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+
+app.use('/user', userRouter)
 
 app.get('/', (req: Request, res: Response) => {
   res.send('API post-phrase is running...')
 })
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running in http://localhost/${process.env.PORT}...`)
-});
-
-(async () => {
-  try {
-    await database.sync({ alter: true })
-    console.log('DB is ready...')
-  } catch (err: any) {
-    console.log(err.message)
-  }
-})()
-
-
-  
+try {
+  app.listen(process.env.PORT, () => {
+    console.log(`Server is running in http://localhost:${process.env.PORT}...`)
+  })
+} catch (err: any) {
+  console.log(`Error occurred: ${err.message}`)
+};
