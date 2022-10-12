@@ -9,7 +9,7 @@ class Authentication {
     return jwt.sign(
       { id: payload.id },
       process.env.JWT_KEY as string,
-      { expiresIn: process.env.EXPIRES_IN }
+      { expiresIn: process.env.JWT_EXPIRES_IN as string }
     )
   }
   getTokenData(token: string): AuthenticationData {
