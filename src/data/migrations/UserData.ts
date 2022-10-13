@@ -3,7 +3,7 @@ import { BaseData } from "../BaseData";
 
 class UserData extends BaseData {
     private tableName: string = 'user'
-    public async signup(user: UserModel) {
+    async signup(user: UserModel) {
         try {
             const { id, name, email, password, createdAt } = user
             await BaseData.dbConnection.insert({
@@ -15,6 +15,22 @@ class UserData extends BaseData {
             }).into(this.tableName)
         } catch (err: any) {
             throw new Error(`Database error: ${err.message}`);
+        }
+    }
+    async getUserByEmail(email: string) {
+        try {
+            const result = await BaseData.dbConnection(this.tableName)
+              .select('*')
+              .where({ email });
+            return {
+                id: result[0].id,
+                name: result[0].name,
+                email: result[0].email,
+                password: result[0].password,
+                createdAt: result[0].createdAt,
+            }
+        } catch(err: any) {
+            console.error(err.message)
         }
     }
 }

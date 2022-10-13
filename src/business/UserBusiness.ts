@@ -1,8 +1,9 @@
+import { BaseData } from './../data/BaseData';
 import { authentication } from './../services/authenticator';
 import { userData } from './../data/migrations/UserData';
 import { hashManager } from './../services/hashManager';
 import { generateId } from './../services/idGenerator';
-import { CreateUserInput, UserModel } from './../model/UserModel';
+import { CreateUserInput, UserLogin, UserModel } from './../model/UserModel';
 
 class UserBusiness {
     async signup(user: CreateUserInput) {
@@ -25,9 +26,31 @@ class UserBusiness {
             }
             await userData.signup(body)
             const token = authentication.generateToken({ id })
-            return token
+            return {
+                token, 
+                user: body
+            }
         } catch (err: any) {
             return err.message
+        }
+    }
+    async login(input: UserLogin) {
+        try {   
+            if(!input.email || !input.password) {
+                throw new Error('Input cannot be empty!')
+            }
+            const user = await userData.getUserByEmail(input.email)
+            if(!user) {
+                throw new Error('User not found or wrong password!')
+            }
+            const passwordIsCorrect: boolean = await hashManager.compare(input.password, user.password)
+            if (!passwordIsCorrect) {
+                throw new Error('User not found or wrong password!')
+            }
+            const token: string = authentication.generateToken({ id: user.id })
+            return ({ token, user })
+        } catch(err: any) {
+            console.error(err.message)
         }
     }
 } 
