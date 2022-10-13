@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import userRouter from './routes/userRouter'
+import postRouter from './routes/postRouter'
 
 dotenv.config()
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 app.use('/user', userRouter)
+app.use('/post', postRouter)
 
 app.get('/', (req: Request, res: Response) => {
   res.send('API post-phrase is running...')
