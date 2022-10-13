@@ -3,6 +3,10 @@ export interface CreateUserInput {
     email: string,
     password: string
 }
+export interface UserLogin {
+    email: string,
+    password: string
+}
 
 export class UserModel implements CreateUserInput {
     id!: string
