@@ -3,10 +3,10 @@ import { authentication } from './../services/authenticator';
 import { userData } from './../data/migrations/UserData';
 import { hashManager } from './../services/hashManager';
 import { generateId } from './../services/idGenerator';
-import { CreateUserInput, UserLogin, UserModel } from './../model/UserModel';
+import { CreateUserInputDTO, UserLoginDTO, UserModel, EditUserDTO } from './../model/UserModel';
 
 class UserBusiness {
-    async signup(user: CreateUserInput) {
+    async signup(user: CreateUserInputDTO) {
         try {
             if(
                 !user.name ||
@@ -34,7 +34,7 @@ class UserBusiness {
             return err.message
         }
     }
-    async login(input: UserLogin) {
+    async login(input: UserLoginDTO) {
         try {   
             if(!input.email || !input.password) {
                 throw new Error('Input cannot be empty!')
@@ -49,6 +49,24 @@ class UserBusiness {
             }
             const token: string = authentication.generateToken({ id: user.id })
             return ({ token, user })
+        } catch(err: any) {
+            console.error(err.message)
+        }
+    }
+    async editUser(user: EditUserDTO) {
+        try {
+            const token = user.token ? authentication.getTokenData(user.token) : null
+            if(user.name === '' || user.email === '') {
+                throw new Error('Input cannot be empty!')
+            } else if (!user.name && !user.email) {
+                throw new Error('Change at least one input!')
+            } 
+            const body: EditUserDTO = {
+                id: token?.id,
+                name: user.name,
+                email: user.email
+            }
+        await userData.editUser(body)
         } catch(err: any) {
             console.error(err.message)
         }

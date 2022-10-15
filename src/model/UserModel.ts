@@ -1,14 +1,20 @@
-export interface CreateUserInput {
+export interface CreateUserInputDTO {
     name: string,
     email: string,
     password: string
 }
-export interface UserLogin {
+export interface UserLoginDTO {
     email: string,
     password: string
 }
 
-export class UserModel implements CreateUserInput {
+export interface EditUserDTO {
+    id?: string,
+    token?: string,
+    name: string,
+    email: string
+}
+export class UserModel implements CreateUserInputDTO {
     id!: string
     name!: string
     email!: string

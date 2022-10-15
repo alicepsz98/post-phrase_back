@@ -1,4 +1,4 @@
-import { UserModel } from './../../model/UserModel';
+import { UserModel, EditUserDTO } from './../../model/UserModel';
 import { BaseData } from "../BaseData";
 
 class UserData extends BaseData {
@@ -29,6 +29,16 @@ class UserData extends BaseData {
                 password: result[0].password,
                 createdAt: result[0].createdAt,
             }
+        } catch(err: any) {
+            console.error(err.message)
+        }
+    }
+    async editUser(user: EditUserDTO) {
+        try {
+            const { id, name, email } = user 
+            await BaseData.dbConnection(this.tableName)
+                .update({ name, email })
+                .where({ id })
         } catch(err: any) {
             console.error(err.message)
         }
