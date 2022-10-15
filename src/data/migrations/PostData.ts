@@ -1,4 +1,5 @@
-import { PostModel } from './../../model/PostModel';
+import { EditUserDTO } from './../../model/UserModel';
+import { PostModel, EditPostDTO } from './../../model/PostModel';
 import { BaseData } from './../BaseData';
 
 class PostData extends BaseData {
@@ -16,6 +17,16 @@ class PostData extends BaseData {
         createdAt
       }).into(this.tableName)
     } catch (err: any) {
+      console.error(err.message)
+    }
+  }
+  async editPost(post: EditPostDTO) {
+    try {
+      const { id, title, content, category, author }: EditPostDTO = post
+      await BaseData.dbConnection(this.tableName)
+        .update({ title, content, category, author })
+        .where({ id })
+    } catch(err: any) {
       console.error(err.message)
     }
   }
