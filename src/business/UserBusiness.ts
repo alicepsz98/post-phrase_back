@@ -3,7 +3,7 @@ import { authentication } from './../services/authenticator';
 import { userData } from './../data/migrations/UserData';
 import { hashManager } from './../services/hashManager';
 import { generateId } from './../services/idGenerator';
-import { CreateUserInputDTO, UserLoginDTO, UserModel, EditUserDTO } from './../model/UserModel';
+import { CreateUserInputDTO, UserLoginDTO, UserModel, EditUserDTO, DeleteUserDTO } from './../model/UserModel';
 
 class UserBusiness {
     async signup(user: CreateUserInputDTO) {
@@ -69,6 +69,20 @@ class UserBusiness {
         await userData.editUser(body)
         } catch(err: any) {
             console.error(err.message)
+        }
+    }
+    async deleteUser(user: DeleteUserDTO) {
+        try {
+            const token = user.token ? authentication.getTokenData(user.token) : null
+            if (!user || !user.token) {
+                throw new Error()
+            }
+            const body = {
+                id: token?.id
+            }
+            await userData.deleteUser(body)
+        } catch(err: any) {
+            throw new Error(err.message)
         }
     }
 } 

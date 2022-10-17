@@ -14,6 +14,12 @@ export interface EditUserDTO {
     name: string,
     email: string
 }
+
+export interface DeleteUserDTO {
+    token?: string
+    id?: string
+}
+
 export class UserModel implements CreateUserInputDTO {
     id!: string
     name!: string

@@ -23,6 +23,9 @@ class UserController {
     } 
     async editUser(req: Request, res: Response) {
         try {
+            if(!req.headers.authorization) {
+                throw new Error('Not authorized!')
+            }
             const body: EditUserDTO = {
                 token: req.headers.authorization as string,
                 name: req.body.name,
@@ -32,6 +35,20 @@ class UserController {
             res.status(200).send({ message: 'User updated!', user: body })
         } catch (err: any) {
             console.error(err.message)
+        }
+    }
+    async deleteUser(req: Request, res: Response) {
+        try {
+            if(!req.headers.authorization) {
+                throw new Error('Not authorized!')
+            }
+            const body = {
+                token: req.headers.authorization as string
+            }
+            await userBusiness.deleteUser(body)
+            res.status(200).send({ message: 'User deleted!'})
+        } catch(err: any) {
+            res.status(400).send(err.message)
         }
     }
 } 

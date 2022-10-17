@@ -1,4 +1,4 @@
-import { UserModel, EditUserDTO } from './../../model/UserModel';
+import { UserModel, EditUserDTO, DeleteUserDTO } from './../../model/UserModel';
 import { BaseData } from "../BaseData";
 
 class UserData extends BaseData {
@@ -20,8 +20,8 @@ class UserData extends BaseData {
     async getUserByEmail(email: string) {
         try {
             const result = await BaseData.dbConnection(this.tableName)
-              .select('*')
-              .where({ email });
+                .select('*')
+                .where({ email });
             return {
                 id: result[0].id,
                 name: result[0].name,
@@ -41,6 +41,16 @@ class UserData extends BaseData {
                 .where({ id })
         } catch(err: any) {
             console.error(err.message)
+        }
+    }
+    async deleteUser(user: DeleteUserDTO) {
+        try {
+            const { id } = user
+            await BaseData.dbConnection(this.tableName)
+                .del()
+                .where({ id })
+        } catch(err: any) {
+            throw new Error(err.message)
         }
     }
 }
