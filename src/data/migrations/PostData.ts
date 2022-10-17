@@ -8,7 +8,7 @@ class PostData extends BaseData {
     try {
       const { id, title, content, category, author, user_id, createdAt } = post
       await BaseData.dbConnection.insert({
-        id, 
+        id,
         title,
         content,
         category,
@@ -26,8 +26,17 @@ class PostData extends BaseData {
       await BaseData.dbConnection(this.tableName)
         .update({ title, content, category, author })
         .where({ id })
-    } catch(err: any) {
+    } catch (err: any) {
       console.error(err.message)
+    }
+  }
+  async deletePost(id: string) {
+    try {
+      await BaseData.dbConnection(this.tableName)
+        .del()
+        .where({ id })
+    } catch (err: any) {
+      throw new Error(err.message)
     }
   }
 }

@@ -32,6 +32,18 @@ class PostController {
       console.error(err.message)
     }
   }
+  async deletePost(req: Request, res: Response) {
+    try{ 
+      if(!req.headers.authorization) {
+        throw new Error('Not authorized!')
+      }
+      const id: string = req.params.id
+      await postBusiness.deletePost(id)
+      res.status(200).send({ message: 'Post deleted!'})
+    } catch(err: any) {
+      res.status(400).send(err.message)
+    }
+  }
 } 
 
 export const postController = new PostController()

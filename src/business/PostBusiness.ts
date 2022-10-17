@@ -61,6 +61,13 @@ class PostBusiness {
       console.error(err.message)
     }
   }
+  async deletePost(id: string) {
+    try {
+      await postData.deletePost(id)
+    } catch(err: any) {
+      throw new Error(err.message)
+    }
+  }
 }
 
 export const postBusiness = new PostBusiness()
