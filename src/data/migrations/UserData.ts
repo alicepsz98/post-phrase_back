@@ -68,8 +68,8 @@ class UserData extends BaseData {
       const result = await BaseData.dbConnection(this.tableName)
         .select('*')
       return result
-    } catch(err: any) {
-      throw new Error(`Database error: ${err.message}`) 
+    } catch (err: any) {
+      throw new Error(`Database error: ${err.message}`)
     }
   }
 }

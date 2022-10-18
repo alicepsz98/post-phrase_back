@@ -74,12 +74,20 @@ class PostBusiness {
   async getPostById(id: string) {
     try {
       const post = postData.getPostById(id)
-      if(!post) {
+      if (!post) {
         throw new Error('Post not found!')
       }
       return post
     } catch (err: any) {
-      return err.message 
+      return err.message
+    }
+  }
+  async getAllPosts() {
+    try {
+      const result = await postData.getAllPosts()
+      return result
+    } catch (err: any) {
+      return err.message
     }
   }
 }
