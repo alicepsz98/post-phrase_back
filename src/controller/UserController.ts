@@ -1,11 +1,11 @@
-import { CreateUserInputDTO, UserLoginDTO, EditUserDTO } from './../model/UserModel';
 import { Request, Response } from 'express'
+import { CreateUserDTO, UserLoginDTO, EditUserDTO } from './../model/UserModel';
 import { userBusiness } from './../business/UserBusiness';
 
 class UserController {
     async signup(req: Request, res: Response) {
         try {
-            const { name, email, password }: CreateUserInputDTO = req.body
+            const { name, email, password }: CreateUserDTO = req.body
             const data = await userBusiness.signup({ name, email, password })
             res.status(201).send(data)
         } catch (err: any) {
@@ -18,7 +18,7 @@ class UserController {
             const data = await userBusiness.login({ email, password })
             res.status(201).send(data)
         } catch (err: any) {
-            console.error(err.message)
+            res.status(400).send(err.message)
         }
     } 
     async editUser(req: Request, res: Response) {
@@ -34,7 +34,7 @@ class UserController {
             await userBusiness.editUser(body)
             res.status(200).send({ message: 'User updated!', user: body })
         } catch (err: any) {
-            console.error(err.message)
+            res.status(400).send(err.message)
         }
     }
     async deleteUser(req: Request, res: Response) {
