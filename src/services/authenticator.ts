@@ -14,7 +14,7 @@ class Authentication {
   }
   getTokenData(token: string): AuthenticationData {
     return jwt.verify(
-      token, 
+      token,
       process.env.JWT_KEY as string
     ) as AuthenticationData
   }

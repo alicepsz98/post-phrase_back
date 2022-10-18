@@ -25,4 +25,4 @@ try {
   })
 } catch (err: any) {
   console.log(`Error occurred: ${err.message}`)
-};
+}

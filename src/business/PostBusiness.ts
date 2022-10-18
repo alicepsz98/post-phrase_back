@@ -5,8 +5,8 @@ import { CreatePostDTO, PostModel, EditPostDTO } from './../model/PostModel'
 class PostBusiness {
   async createPost(post: CreatePostDTO) {
     try {
-      if(
-        !post.title || 
+      if (
+        !post.title ||
         !post.content ||
         !post.category ||
         !post.author ||
@@ -16,7 +16,7 @@ class PostBusiness {
       }
       const id: string = generateId()
       const body: PostModel = {
-        id, 
+        id,
         title: post.title,
         content: post.content,
         category: post.category,
@@ -32,23 +32,23 @@ class PostBusiness {
   }
   async editPost(post: EditPostDTO) {
     try {
-      if(
-        post.title === '' || 
-        post.content === '' || 
-        post.category === '' || 
+      if (
+        post.title === '' ||
+        post.content === '' ||
+        post.category === '' ||
         post.author === ''
       ) {
         throw new Error('Input cannot be empty!')
-      } else if(
+      } else if (
         !post.title &&
         !post.content &&
         !post.category &&
-        !post.author 
+        !post.author
       ) {
         throw new Error('Change at least one input!')
-      } else if(!post.id || post.id === '') {
+      } else if (!post.id || post.id === '') {
         throw new Error('Id not found!')
-      } 
+      }
       const body: EditPostDTO = {
         id: post.id,
         title: post.title,
@@ -57,17 +57,17 @@ class PostBusiness {
         author: post.author
       }
       await postData.editPost(body)
-    } catch(err: any) {
+    } catch (err: any) {
       return err.message
     }
   }
   async deletePost(id: string) {
     try {
-      if(!id || id === '') {
+      if (!id || id === '') {
         throw new Error('Id not found!')
-      } 
+      }
       await postData.deletePost(id)
-    } catch(err: any) {
+    } catch (err: any) {
       return err.message
     }
   }

@@ -1,9 +1,9 @@
-export interface CreatePostInputDTO {
+export interface CreatePostDTO {
   title: string,
   content: string,
-  category: string
-  author: string
-  user_id: string
+  category: string,
+  author: string,
+  user_id: string,
 }
 
 export interface EditPostDTO {
@@ -11,10 +11,10 @@ export interface EditPostDTO {
   title: string,
   content: string,
   category: string,
-  author: string
+  author: string,
 }
 
-export class PostModel implements CreatePostInputDTO {
+export class PostModel implements CreatePostDTO {
   id!: string
   title!: string
   content!: string
