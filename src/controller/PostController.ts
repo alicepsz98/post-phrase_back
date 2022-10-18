@@ -47,6 +47,18 @@ class PostController {
       res.status(400).send(err.message)
     }
   }
+  async getPostById(req: Request, res: Response) {
+    try {
+      if (!req.headers.authorization) {
+        throw new Error('Not authorized!')
+      }
+      const id = req.params.id
+      const post = await postBusiness.getPostById(id)
+      res.status(200).send(post)
+    } catch(err: any) {
+      res.status(400).send(err.message)
+    }
+  }
 }
 
 export const postController = new PostController()

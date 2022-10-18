@@ -38,6 +38,16 @@ class PostData extends BaseData {
       throw new Error(`Database error: ${err.message}`)
     }
   }
+  async getPostById(id: string) {
+    try {
+      const result = await BaseData.dbConnection(this.tableName)
+        .select('*')
+        .where({ id })
+      return result[0]
+    } catch (err: any) {
+      throw new Error(`Database error: ${err.message}`)
+    }
+  }
 }
 
 export const postData = new PostData()

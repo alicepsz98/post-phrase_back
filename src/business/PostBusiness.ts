@@ -71,6 +71,17 @@ class PostBusiness {
       return err.message
     }
   }
+  async getPostById(id: string) {
+    try {
+      const post = postData.getPostById(id)
+      if(!post) {
+        throw new Error('Post not found!')
+      }
+      return post
+    } catch (err: any) {
+      return err.message 
+    }
+  }
 }
 
 export const postBusiness = new PostBusiness()
