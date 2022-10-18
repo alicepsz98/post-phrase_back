@@ -1,6 +1,5 @@
-import { EditUserDTO } from './../../model/UserModel';
-import { PostModel, EditPostDTO } from './../../model/PostModel';
-import { BaseData } from './../BaseData';
+import { BaseData } from './../BaseData'
+import { PostModel, EditPostDTO } from './../../model/PostModel'
 
 class PostData extends BaseData {
   private tableName: string = 'post'
@@ -17,7 +16,7 @@ class PostData extends BaseData {
         createdAt
       }).into(this.tableName)
     } catch (err: any) {
-      console.error(err.message)
+      throw new Error(`Database error: ${err.message}`)
     }
   }
   async editPost(post: EditPostDTO) {
@@ -27,7 +26,7 @@ class PostData extends BaseData {
         .update({ title, content, category, author })
         .where({ id })
     } catch (err: any) {
-      console.error(err.message)
+      throw new Error(`Database error: ${err.message}`)
     }
   }
   async deletePost(id: string) {
@@ -36,7 +35,7 @@ class PostData extends BaseData {
         .del()
         .where({ id })
     } catch (err: any) {
-      throw new Error(err.message)
+      throw new Error(`Database error: ${err.message}`)
     }
   }
 }

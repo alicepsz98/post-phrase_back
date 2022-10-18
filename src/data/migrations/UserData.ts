@@ -1,5 +1,5 @@
-import { UserModel, EditUserDTO, DeleteUserDTO } from './../../model/UserModel';
-import { BaseData } from "../BaseData";
+import { BaseData } from '../BaseData'
+import { UserModel, EditUserDTO, DeleteUserDTO } from './../../model/UserModel'
 
 class UserData extends BaseData {
     private tableName: string = 'user'
@@ -14,14 +14,14 @@ class UserData extends BaseData {
                 createdAt
             }).into(this.tableName)
         } catch (err: any) {
-            throw new Error(`Database error: ${err.message}`);
+            throw new Error(`Database error: ${err.message}`)
         }
     }
     async getUserByEmail(email: string) {
         try {
             const result = await BaseData.dbConnection(this.tableName)
                 .select('*')
-                .where({ email });
+                .where({ email })
             return {
                 id: result[0].id,
                 name: result[0].name,
@@ -30,7 +30,7 @@ class UserData extends BaseData {
                 createdAt: result[0].createdAt,
             }
         } catch(err: any) {
-            console.error(err.message)
+            throw new Error(`Database error: ${err.message}`)
         }
     }
     async editUser(user: EditUserDTO) {
@@ -40,7 +40,7 @@ class UserData extends BaseData {
                 .update({ name, email })
                 .where({ id })
         } catch(err: any) {
-            console.error(err.message)
+            throw new Error(`Database error: ${err.message}`)
         }
     }
     async deleteUser(user: DeleteUserDTO) {
@@ -50,7 +50,7 @@ class UserData extends BaseData {
                 .del()
                 .where({ id })
         } catch(err: any) {
-            throw new Error(err.message)
+            throw new Error(`Database error: ${err.message}`)
         }
     }
 }
