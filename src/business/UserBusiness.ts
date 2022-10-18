@@ -1,12 +1,11 @@
-import { BaseData } from './../data/BaseData';
 import { authentication } from './../services/authenticator';
 import { userData } from './../data/migrations/UserData';
 import { hashManager } from './../services/hashManager';
 import { generateId } from './../services/idGenerator';
-import { CreateUserInputDTO, UserLoginDTO, UserModel, EditUserDTO, DeleteUserDTO } from './../model/UserModel';
+import { CreateUserDTO, UserLoginDTO, UserModel, EditUserDTO, DeleteUserDTO } from './../model/UserModel';
 
 class UserBusiness {
-    async signup(user: CreateUserInputDTO) {
+    async signup(user: CreateUserDTO) {
         try {
             if(
                 !user.name ||
@@ -50,7 +49,7 @@ class UserBusiness {
             const token: string = authentication.generateToken({ id: user.id })
             return ({ token, user })
         } catch(err: any) {
-            console.error(err.message)
+            return err.message
         }
     }
     async editUser(user: EditUserDTO) {
@@ -68,21 +67,21 @@ class UserBusiness {
             }
         await userData.editUser(body)
         } catch(err: any) {
-            console.error(err.message)
+            return err.message
         }
     }
     async deleteUser(user: DeleteUserDTO) {
         try {
             const token = user.token ? authentication.getTokenData(user.token) : null
             if (!user || !user.token) {
-                throw new Error()
+                throw new Error('User not found or unauthorized')
             }
             const body = {
                 id: token?.id
             }
             await userData.deleteUser(body)
         } catch(err: any) {
-            throw new Error(err.message)
+            return err.message
         }
     }
 } 

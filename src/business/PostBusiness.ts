@@ -1,9 +1,9 @@
-import { postData } from './../data/migrations/PostData';
-import { generateId } from './../services/idGenerator';
-import { CreatePostInputDTO, PostModel, EditPostDTO } from './../model/PostModel';
+import { postData } from './../data/migrations/PostData'
+import { generateId } from './../services/idGenerator'
+import { CreatePostDTO, PostModel, EditPostDTO } from './../model/PostModel'
 
 class PostBusiness {
-  async createPost(post: CreatePostInputDTO) {
+  async createPost(post: CreatePostDTO) {
     try {
       if(
         !post.title || 
@@ -12,7 +12,7 @@ class PostBusiness {
         !post.author ||
         !post.user_id
       ) {
-        throw new Error()
+        throw new Error('Input cannot be empty!')
       }
       const id: string = generateId()
       const body: PostModel = {
@@ -27,7 +27,7 @@ class PostBusiness {
       await postData.createPost(body)
       return ({ post: body })
     } catch (err: any) {
-      console.error(err.message)
+      return err.message
     }
   }
   async editPost(post: EditPostDTO) {
@@ -58,14 +58,17 @@ class PostBusiness {
       }
       await postData.editPost(body)
     } catch(err: any) {
-      console.error(err.message)
+      return err.message
     }
   }
   async deletePost(id: string) {
     try {
+      if(!id || id === '') {
+        throw new Error('Id not found!')
+      } 
       await postData.deletePost(id)
     } catch(err: any) {
-      throw new Error(err.message)
+      return err.message
     }
   }
 }
