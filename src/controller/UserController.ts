@@ -51,6 +51,15 @@ class UserController {
       res.status(400).send(err.message)
     }
   }
+  async getUserById(req: Request, res: Response) {
+    try {
+      const id = req.params.id
+      const user = await userBusiness.getUserById(id)
+      res.status(200).send(user)
+    } catch(err: any) {
+      res.status(400).send(err.message)
+    }
+  }
 }
 
 export const userController = new UserController()

@@ -7,5 +7,6 @@ userRouter.post('/signup', userController.signup)
 userRouter.post('/login', userController.login)
 userRouter.put('/edit', userController.editUser)
 userRouter.delete('/delete', userController.deleteUser)
+userRouter.get('/:id', userController.getUserById)
 
 export default userRouter

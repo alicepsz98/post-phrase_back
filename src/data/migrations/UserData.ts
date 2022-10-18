@@ -36,9 +36,9 @@ class UserData extends BaseData {
   async editUser(user: EditUserDTO) {
     try {
       const { id, name, email } = user
-        await BaseData.dbConnection(this.tableName)
-          .update({ name, email })
-          .where({ id })
+      await BaseData.dbConnection(this.tableName)
+        .update({ name, email })
+        .where({ id })
     } catch (err: any) {
       throw new Error(`Database error: ${err.message}`)
     }
@@ -49,6 +49,16 @@ class UserData extends BaseData {
       await BaseData.dbConnection(this.tableName)
         .del()
         .where({ id })
+    } catch (err: any) {
+      throw new Error(`Database error: ${err.message}`)
+    }
+  }
+  async getUserById(id: string) {
+    try {
+      const result = await BaseData.dbConnection(this.tableName)
+        .select('*')
+        .where({ id })
+      return result[0]
     } catch (err: any) {
       throw new Error(`Database error: ${err.message}`)
     }

@@ -84,6 +84,20 @@ class UserBusiness {
       return err.message
     }
   }
+  async getUserById(id: string) {
+    try {
+      const user = userData.getUserById(id)
+      if(!id) {
+        throw new Error('Id not found!')
+      }
+      if(!user) {
+        throw new Error('User not found!')
+      }
+      return user
+    } catch (err: any) {
+      return err.message 
+    }
+  }
 }
 
 export const userBusiness = new UserBusiness()
