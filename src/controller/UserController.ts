@@ -53,9 +53,23 @@ class UserController {
   }
   async getUserById(req: Request, res: Response) {
     try {
+      if (!req.headers.authorization) {
+        throw new Error('Not authorized!')
+      }
       const id = req.params.id
       const user = await userBusiness.getUserById(id)
       res.status(200).send(user)
+    } catch(err: any) {
+      res.status(400).send(err.message)
+    }
+  }
+  async getAllUsers(req: Request, res: Response) {
+    try { 
+      if (!req.headers.authorization) {
+        throw new Error('Not authorized!')
+      }
+      const result = await userBusiness.getAllUsers()
+      res.status(200).json({ users: result })
     } catch(err: any) {
       res.status(400).send(err.message)
     }
