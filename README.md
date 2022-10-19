@@ -4,7 +4,7 @@
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/alicepsz98/post-phrase_back?logo=ts">
 
-  <img alt="GitHub repo size in bytes" src="https://img.shields.io/github/repo-size/alicepsz98/post-phrase_back?color=green">
+  <img alt="GitHub repo size in bytes" src="https://img.shields.io/github/repo-size/alicepsz98/post-phrase_back?color=pink">
 
   <br>
 
@@ -12,14 +12,16 @@
 
 ---
 
-- :rocket: [About the Project](#rocket-sobre-o-projeto)
-- 👩‍💻 [Technologies](#%EF%B8%8F-tecnogias-utilizadas)
-- 📦️ [How to use](#%EF%B8%8F-como-utilizar-o-projeto)
-- 🤔️ [Contribution](#%EF%B8%8F-como-contribuir)
+<p align="center">
+  <span>The Project</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <span>Technologies</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <span>How to use</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <span>Contribution</span>
+</p>
 
 ---
 
-## :rocket: About the Project
+## :rocket: The Project
 
 ### Back-end system of a social network, PostPhrase, with basic implementations for user and post:
   - login
@@ -46,7 +48,7 @@
 
 ## 📦️ How to use
 
-To copy the project, use the commands:
+- To copy the project, use the commands:
 
 ```bash
   # Clone the repository
@@ -54,6 +56,28 @@ To copy the project, use the commands:
 
   # Enter directory
   ❯ cd post-phrase_back
+```
+
+- To install the dependencies and start the project, you can use Yarn or NPM:
+
+**Using yarn**
+
+```bash
+  # Install the dependencies
+  ❯ yarn
+
+  # Start the project
+  ❯ yarn start
+```
+
+**Using npm**
+
+```bash
+  # Install the dependencies
+  ❯ npm install
+
+  # Start the project
+  ❯ npm run start
 ```
 
 ---
