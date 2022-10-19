@@ -1,5 +1,5 @@
 <h1 align="center">
-  📜 PostPhrase (back-end) 🎲
+  📝 PostPhrase (back-end) 🎲
 </h1>
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/alicepsz98/post-phrase_back?logo=ts">
