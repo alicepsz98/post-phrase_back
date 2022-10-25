@@ -13,27 +13,27 @@
 ---
 
 <p align="center">
-  <span>The Project</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <span>Technologies</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <span>How to use</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <span>Contribution</span>
+  <span>O projeto</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <span>Tecnologias</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <span>Como usar</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <span>Contribuição</span>
 </p>
 
 ---
 
-## :rocket: The Project
+## :rocket: O projeto
 
-### Back-end system of a social network, PostPhrase, with basic implementations for user and post:
-  - login
-  - creation (user / post)
-  - get all (user / post)
-  - get by id (user / post)
-  - edit (user / post)
-  - delete (user / post)
+### Sistema back-end de uma rede social, PostPhrase, com implementações básicas para usuário e post:
+  - Login
+  - Cadastro (user / post)
+  - Ler todos os itens (user / post)
+  - Ler item por id (user / post)
+  - Editar (user / post)
+  - Deletar (user / post)
 
 ---
 
-## 👩‍💻 Technologies
+## 👩‍💻 Tecnologias
 
 - Node.js
 - Express
@@ -46,54 +46,54 @@
 
 ---
 
-## 📦️ How to use
+## 📦️ Como usar
 
-- To copy the project, use the commands:
+- Para copiar o projeto, use os comandos:
 
 ```bash
-  # Clone the repository
+  # Clonar o repositório
   ❯ git clone https://github.com/alicepsz98/post-phrase_back.git
 
-  # Enter directory
+  # Entrar no diretório
   ❯ cd post-phrase_back
 ```
 
-- To install the dependencies and start the project, you can use Yarn or NPM:
+- Para instalar as dependências e iniciar o projeto, você pode usar o Yarn ou o NPM:
 
-**Using yarn**
+**Usando yarn**
 
 ```bash
-  # Install the dependencies
+  # Instalar as dependências
   ❯ yarn
 
-  # Start the project
+  # Rodar o projeto
   ❯ yarn start
 ```
 
-**Using npm**
+**Usando npm**
 
 ```bash
-  # Install the dependencies
+  # Instalar as dependências
   ❯ npm install
 
-  # Start the project
+  # Rodar o projeto
   ❯ npm run start
 ```
 
 ---
 
-## 🤔️ Contribution
+## 🤔️ Contribuição
 
-1. `fork` this repository
-2. Create a branch with your feature:
+1. `fork` neste repositório
+2. Crie uma branch com sua feature:
    - `$ git checkout -b my_feature`
-3. Confirm your branch:
+3. Faça o commit:
    - `$ git commit -m "feature: my new feature"`
-4. Send your branch:
+4. Envie as atualizações:
    - `$ git push origin my_feature`
 
 ---
 
 <h4 align="center">
- by Alice Souza 💚
+ por Alice Souza 💚
 </h4>
